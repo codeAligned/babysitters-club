@@ -12,7 +12,11 @@ class ParentsController < ApplicationController
 	def show
 		parent = Parent.find(params[:id])
 		render json: parent
-	end  
+	end 
+
+	def create
+		
+	end 
 
 end
 
