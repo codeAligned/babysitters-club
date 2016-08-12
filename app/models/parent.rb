@@ -4,5 +4,9 @@ class Parent < ApplicationRecord
   has_many :bookings
   has_many :requests
 
+  def self.search(search)
+    where("name LIKE ?", "%#{search}%")
+  end
+
 
 end
