@@ -4,6 +4,7 @@ class Request < ApplicationRecord
 
   def accept
     ParentBabysitter.create({parent_id: self.parent_id, babysitter_id: self.babysitter_id})
+    # request disappears
   end
 
 end
