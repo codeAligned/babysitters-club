@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  parent: one
+  babysitter: one
+  date: 2016-08-12
+  time: 2016-08-12 11:14:46
+  duration: 1
+
+two:
+  parent: two
+  babysitter: two
+  date: 2016-08-12
+  time: 2016-08-12 11:14:46
+  duration: 1
