@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  parent_babysitter: one
+  title: MyString
+  review: MyText
+  rating: 1
+
+two:
+  parent_babysitter: two
+  title: MyString
+  review: MyText
+  rating: 1

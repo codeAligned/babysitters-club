@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20160812200359) do
+=======
+ActiveRecord::Schema.define(version: 20160812201913) do
+>>>>>>> d2e3c37a5b2705957fed32cb62d7ce759d16fb8e
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +24,17 @@ ActiveRecord::Schema.define(version: 20160812200359) do
     t.string   "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "booking_requests", force: :cascade do |t|
+    t.integer  "parent_id"
+    t.integer  "babysitter_id"
+    t.datetime "datetime"
+    t.integer  "duration"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["babysitter_id"], name: "index_booking_requests_on_babysitter_id", using: :btree
+    t.index ["parent_id"], name: "index_booking_requests_on_parent_id", using: :btree
   end
 
   create_table "bookings", force: :cascade do |t|
@@ -56,6 +71,22 @@ ActiveRecord::Schema.define(version: 20160812200359) do
     t.datetime "updated_at",    null: false
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "parent_id"
+    t.integer  "babysitter_id"
+    t.string   "title"
+    t.text     "review"
+    t.integer  "rating"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["babysitter_id"], name: "index_reviews_on_babysitter_id", using: :btree
+    t.index ["parent_id"], name: "index_reviews_on_parent_id", using: :btree
+  end
+
+  add_foreign_key "booking_requests", "babysitters"
+  add_foreign_key "booking_requests", "parents"
   add_foreign_key "bookings", "babysitters"
   add_foreign_key "bookings", "parents"
+  add_foreign_key "reviews", "babysitters"
+  add_foreign_key "reviews", "parents"
 end
