@@ -7,4 +7,12 @@ class Request < ApplicationRecord
     # request disappears
   end
 
+  def self.all_babysitter_request(babysitter_id)
+  	where('babysitter_id = ?', '#{babysitter_id}')
+  end 
+
+  def self.all_parent_request(parent_id)
+  	where('parent_id = ?', '#{parent_id}')
+  end 
+
 end
