@@ -5,11 +5,12 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Parent.destroy_all
-Babysitter.destroy_all
 ParentBabysitter.destroy_all
 Booking.destroy_all
 Request.destroy_all
+Parent.destroy_all
+Babysitter.destroy_all
+
 
 
 tom = Parent.create(name: "Tom", email: 'tom@tom.com')
