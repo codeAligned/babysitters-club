@@ -18,11 +18,16 @@ class ParentsController < ApplicationController
 	end
 
 	def update
-		parent = Parent.find(params[:parent_id])
+		parent = Parent.find(params[:id])
 		parent.update(name: params[:name], email: params[:email])
 		# (parents_params) don't forget patch!
 		render json: parent
 	end
+
+  def destroy
+    parent = Parent.find(params[:id])
+    parent.delete
+  end
 
 	private
 

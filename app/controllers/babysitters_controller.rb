@@ -17,11 +17,16 @@ class BabysittersController < ApplicationController
 	end
 
 	def update
-		babysitter = Babysitter.find(params[:babysitter_id])
+		babysitter = Babysitter.find(params[:id])
 		babysitter.update(name: params[:name], email: params[:email])
 		# (babysitter_params) don't forget patch!
 		render json: babysitter
 	end
+
+  def destroy
+    babysitter = Babysitter.find(params[:id])
+    babysitter.delete
+  end
 
 	private
 

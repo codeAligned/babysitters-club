@@ -15,6 +15,11 @@ class BookingRequestsController < ApplicationController
     render json: request
   end
 
+  def destroy
+    request = BookingRequest.find(params[:id])
+    request.delete
+  end
+
 private
 
 	 def booking_requests_params
