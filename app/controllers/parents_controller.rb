@@ -1,7 +1,7 @@
 class ParentsController < ApplicationController
 
 	def index
-		render json: Parent.all, includes:['babysitters','requests','bookings']
+		render json: Parent.all, includes:['babysitters','requests','bookings', 'booking_requests']
 	end
 
 	def show
@@ -9,6 +9,6 @@ class ParentsController < ApplicationController
 		render json: parent
 	end
 
-	
+
 
 end
