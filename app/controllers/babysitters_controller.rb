@@ -16,6 +16,13 @@ class BabysittersController < ApplicationController
 		render json: babysitter
 	end
 
+	def update
+		babysitter = Babysitter.find(params[:babysitter_id])
+		babysitter.update(name: params[:name], email: params[:email])
+		# (babysitter_params) don't forget patch!
+		render json: babysitter
+	end
+
 	private
 
  	def babysitter_params
