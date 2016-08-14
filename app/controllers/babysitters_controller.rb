@@ -2,6 +2,9 @@ class BabysittersController < ApplicationController
 
 
 	def create
+		babysitter = Babysitter.create(name: params[:name], email: params[:email])
+		# babysitter = Babysitter.create(babysitter_params)
+		render json: babysitter
 	end
 
 	def index
@@ -12,6 +15,13 @@ class BabysittersController < ApplicationController
 		babysitter = Babysitter.find(params[:id])
 		render json: babysitter
 	end
+
+	private
+
+ 	def babysitter_params
+	 	params.require(:babysitter).permit(:name, :email)
+ 	end
+
 
 
 end
