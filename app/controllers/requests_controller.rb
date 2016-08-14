@@ -1,21 +1,22 @@
-class RequestController < ApplicationController
+class RequestsController < ApplicationController
 
 	def index
-		if params[:babysitter_id]
-			request = Request.all_babysitter_request(params[:babysitter_id])
-		elsif params[:parent_id]
-			request = Request.all_parent_request(params[:parent_id])
-		end
+		requests = Request.all
 		render json: requests
 	end
 
-	def show
-
-	end
-
 	def create
-		request = Request.create({parent_id: params[:parent_id], babysitter_id: params[:babysitter_id]})
+		request = Request.create({parent_id: params[:parent_id].to_i, babysitter_id: params[:babysitter_id].to_i})
+		# parent = Parent.create(parents_params)
 		render json: request
 	end
+
+
+
+	private
+
+	 def requests_params
+		 params.require(:requests).permit(:parent_id, :babysitter_id)
+	 end
 
 end
