@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 ParentBabysitter.destroy_all
+Review.destroy_all
 Request.destroy_all
 BookingRequest.destroy_all
 Booking.destroy_all
@@ -32,16 +33,23 @@ Request.create(parent: craig, babysitter: sam)
 Request.create(parent: chris, babysitter: matt)
 Request.create(parent: chris, babysitter: jess)
 
-ParentBabysitter.create(parent: tom, babysitter: jess)
-ParentBabysitter.create(parent: tom, babysitter: sam)
-ParentBabysitter.create(parent: jason, babysitter: todd)
-ParentBabysitter.create(parent: jason, babysitter: matt)
-ParentBabysitter.create(parent: craig, babysitter: sam)
-ParentBabysitter.create(parent: chris, babysitter: matt)
-ParentBabysitter.create(parent: chris, babysitter: jess)
+tom_jess = ParentBabysitter.create(parent: tom, babysitter: jess)
+tom_sam = ParentBabysitter.create(parent: tom, babysitter: sam)
+jason_todd = ParentBabysitter.create(parent: jason, babysitter: todd)
+jason_matt = ParentBabysitter.create(parent: jason, babysitter: matt)
+craig_sam = ParentBabysitter.create(parent: craig, babysitter: sam)
+chris_matt = ParentBabysitter.create(parent: chris, babysitter: matt)
+chris_jess = ParentBabysitter.create(parent: chris, babysitter: jess)
 
 Booking.create(parent: jason, babysitter: matt)
 Booking.create(parent: craig, babysitter: sam)
 Booking.create(parent: chris, babysitter: matt)
 Booking.create(parent: chris, babysitter: jess)
 Booking.create(parent: tom, babysitter: jess)
+
+Review.create(parent_babysitter: tom_jess, title: "great", description: "really awesome", rating: 4)
+Review.create(parent_babysitter: craig_sam, title: "Bad", description: "really not good", rating: 1)
+Review.create(parent_babysitter: chris_matt, title: "Okay", description: "neutral", rating: 2)
+Review.create(parent_babysitter: tom_jess, title: "better", description: "really much better", rating: 7)
+Review.create(parent_babysitter: tom_sam, title: "decent", description: "dec", rating: 5)
+Review.create(parent_babysitter: chris_jess, title: "nice", description: "really nice", rating: 4)
