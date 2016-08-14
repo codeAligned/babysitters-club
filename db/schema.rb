@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160812201913) do
+ActiveRecord::Schema.define(version: 20160814180653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,10 +25,10 @@ ActiveRecord::Schema.define(version: 20160812201913) do
   create_table "booking_requests", force: :cascade do |t|
     t.integer  "parent_id"
     t.integer  "babysitter_id"
-    t.datetime "datetime"
     t.integer  "duration"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.datetime "desired_time"
     t.index ["babysitter_id"], name: "index_booking_requests_on_babysitter_id", using: :btree
     t.index ["parent_id"], name: "index_booking_requests_on_parent_id", using: :btree
   end
@@ -36,10 +36,10 @@ ActiveRecord::Schema.define(version: 20160812201913) do
   create_table "bookings", force: :cascade do |t|
     t.integer  "parent_id"
     t.integer  "babysitter_id"
-    t.datetime "datetime"
     t.integer  "duration"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.datetime "desired_time"
     t.index ["babysitter_id"], name: "index_bookings_on_babysitter_id", using: :btree
     t.index ["parent_id"], name: "index_bookings_on_parent_id", using: :btree
   end
@@ -68,21 +68,14 @@ ActiveRecord::Schema.define(version: 20160812201913) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.integer  "parent_id"
-    t.integer  "babysitter_id"
-    t.string   "title"
-    t.text     "review"
-    t.integer  "rating"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.index ["babysitter_id"], name: "index_reviews_on_babysitter_id", using: :btree
-    t.index ["parent_id"], name: "index_reviews_on_parent_id", using: :btree
+    t.integer "parent_babysitter_id"
+    t.string  "title"
+    t.string  "description"
+    t.integer "rating"
   end
 
   add_foreign_key "booking_requests", "babysitters"
   add_foreign_key "booking_requests", "parents"
   add_foreign_key "bookings", "babysitters"
   add_foreign_key "bookings", "parents"
-  add_foreign_key "reviews", "babysitters"
-  add_foreign_key "reviews", "parents"
 end

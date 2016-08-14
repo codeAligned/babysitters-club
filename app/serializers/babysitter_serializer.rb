@@ -1,6 +1,6 @@
-class ParentSerializer < ActiveModel::Serializer
+class BabysitterSerializer < ActiveModel::Serializer
  attributes :name, :email, :reviews
- has_many :babysitters
+ has_many :parents
  has_many :requests
  has_many :booking_requests
  has_many :bookings
