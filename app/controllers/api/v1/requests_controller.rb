@@ -1,4 +1,4 @@
-class RequestsController < ApplicationController
+class Api::V1::RequestsController < ApplicationController
 
 	def index
 		requests = Request.all

@@ -1,4 +1,4 @@
-class BookingRequestsController < ApplicationController
+class Api::V1::BookingRequestsController < ApplicationController
   def index
     requests = BookingRequest.all
     render json: requests
