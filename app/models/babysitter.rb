@@ -11,6 +11,7 @@ class Babysitter < ApplicationRecord
 
   def total_review_number
     total = 0
+    # use a higher level iterator here (inject?)
     reviews.each{|review| total+=review[:rating]}
     return total
   end
