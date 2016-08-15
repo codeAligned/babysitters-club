@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160814180653) do
+ActiveRecord::Schema.define(version: 20160815193614) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20160814180653) do
     t.string   "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_babysitters_on_user_id", using: :btree
   end
 
   create_table "booking_requests", force: :cascade do |t|
@@ -58,6 +60,8 @@ ActiveRecord::Schema.define(version: 20160814180653) do
     t.datetime "updated_at", null: false
     t.string   "address"
     t.integer  "kid_count"
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_parents_on_user_id", using: :btree
   end
 
   create_table "requests", force: :cascade do |t|
@@ -74,8 +78,21 @@ ActiveRecord::Schema.define(version: 20160814180653) do
     t.integer "rating"
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string   "username",        limit: 30
+    t.string   "name"
+    t.string   "email"
+    t.string   "password_digest"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["username"], name: "index_users_on_username", unique: true, using: :btree
+  end
+
+  add_foreign_key "babysitters", "users"
   add_foreign_key "booking_requests", "babysitters"
   add_foreign_key "booking_requests", "parents"
   add_foreign_key "bookings", "babysitters"
   add_foreign_key "bookings", "parents"
+  add_foreign_key "parents", "users"
 end
