@@ -1,4 +1,4 @@
-class BabysittersController < ApplicationController
+class Api::V1::BabysittersController < ApplicationController
 
 
 	def create

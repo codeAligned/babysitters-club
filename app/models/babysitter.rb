@@ -19,7 +19,8 @@ class Babysitter < ApplicationRecord
 
   def average_review
     length = reviews.count
-    return total_review_number/length
+    # total_review_number/length
+    return nil
   end
 
 end
