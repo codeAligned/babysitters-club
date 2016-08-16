@@ -18,6 +18,8 @@ class Api::V1::ParentsController < ApplicationController
 	end
 
 	def update
+		byebug
+		# We need to finish this upon getting session to work
 		parent = Parent.find(params[:id])
 		parent.update(name: params[:name], email: params[:email])
 		# (parents_params) don't forget patch!

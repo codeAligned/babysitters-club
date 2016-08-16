@@ -1,17 +1,26 @@
 class Api::V1::UsersController < ApplicationController
 
+  def index
+		users = User.all
+		render json: users
+	end
 
   def create
-    byebug
     user = User.create(user_params)
     # parent = Parent.create(parents_params)
     if user_type_params[:user_type]=='parent'
-      username = Parent.create({user_id: user.id})
+      account = Parent.create({user_id: user.id})
     else
-      username = Babysitter.create({user_id: user.id})
+      account = Babysitter.create({user_id: user.id})
     end
-    render json: username
+    render json: account
   end
+
+  def update
+    byebug
+  end
+
+
 
 
 

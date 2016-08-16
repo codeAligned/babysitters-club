@@ -23,4 +23,12 @@ class Babysitter < ApplicationRecord
     return nil
   end
 
+  def name
+    self.user.name
+  end
+
+  def email
+    self.user.email
+  end
+
 end
