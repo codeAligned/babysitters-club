@@ -1,25 +1,35 @@
 class ApplicationController < ActionController::API
-  protect_from_forgery with: :exception
-  # before_action :login_required
-  helper_method :current_user
-
-  def current_user
-    User.find(session[:user_id]) if session[:user_id]
-  end
-
-  def login(user)
-    session[:user_id] = @user.id
-  end
+  before_action :authenticate
 
   def logged_in?
     !!current_user
   end
 
-  # get rid of this? do something else?
-  def login_required
-    if !logged_in?
-      # maybe something here that gets sent?
-      # redirect_to login_path
+  def current_user
+    if auth_present?
+      user = User.find(auth["user"])
+      if user
+        @current_user ||= user
+      end
     end
   end
+
+  def authenticate
+    render json: {error: "unauthorized"}, status: 404 unless logged_in?
+  end
+
+  private
+
+  def token
+    request.env["HTTP_AUTHORIZATION"].scan(/Bearer(.*)$/).flatten.last
+  end
+
+  def auth
+    Auth.decode(token)
+  end
+
+  def auth_present?
+    !!request.env.fetch("HTTP_AUTHORIZATION", "").scan(/Bearer/).flatten.first
+  end
+
 end

@@ -1,46 +1,27 @@
-class Api::V1::SessionsController < ApplicationController
-  # skip_before_action :login_required, only: [:new, :create]
 
-  # def new
-  #   @user = User.new
-  # end
+
+class Api::V1::SessionsController < ApplicationController
+  skip_before_action :authenticate
 
   def create
-    user = User.find_by(user_name: user_name_param)
+    user = User.find_by(email: auth_params[:email])
     if user != nil
-      if user.authenticate(password_param)
-        session[:user_id] = user.id
-        # send message saying authenticated, maybe send session back?
-        # user.id
-        # redirect_to profile_path(session[:user_id])
+      if user.authenticate(auth_params[:password])
+        jwt = Auth.issue({user: user.id})
+        byebug
+        render json: {jwt: jwt, current_user: user}
       else
-        # send message saying authentication failed, password's wrong
-        # flash.now[:invalidpass] = 'Incorrect password'
-        # render 'new'
+        render json: {error: "unauthorized"}, status: 404
       end
     else
-      # user doesn't exist
-      # flash.now[:invaliduser] = 'User does not exist'
-      # render 'new'
+      render json: {error: "user does not exist"}, status: 404
     end
   end
 
-  # on longout
-  def destroy
-    session[:user_id] = nil
-    # send message saying you've logged out
-    # redirect_to root_path
-  end
 
   private
 
-  # fix this
-  def user_name_param
-    params.require(:user).permit(:user_name)[:user_name]
-  end
-
-  # fix this
-  def password_param
-    params.require(:user).permit(:password)[:password]
+  def auth_params
+    params.require(:auth).permit(:email, :password)
   end
 end
