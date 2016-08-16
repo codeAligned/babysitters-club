@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :booking_requests
       resources :reviews
       resources :parents, :babysitters, :requests
+      resources :sessions
     end
   end
 
