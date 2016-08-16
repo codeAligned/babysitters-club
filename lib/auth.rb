@@ -8,9 +8,16 @@ class Auth
       auth_secret,
       ALGORITHM)
   end
+
   def self.decode
+    JWT.decode(token,
+      auth_secret,
+      true,
+      { algorithm: ALGORITHM }).first
   end
+
   def self.auth_secret
     ENV["AUTH_SECRET"]
   end
-end  
+
+end
