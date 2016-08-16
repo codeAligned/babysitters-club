@@ -8,7 +8,8 @@ class Api::V1::SessionsController < ApplicationController
     if user != nil
       if user.authenticate(auth_params[:password])
         jwt = Auth.issue({user: user.id})
-        render json: {jwt: jwt}
+        byebug
+        render json: {jwt: jwt, current_user: user}
       else
         render json: {error: "unauthorized"}, status: 404
       end
