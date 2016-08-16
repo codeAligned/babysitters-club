@@ -10,6 +10,14 @@ class Parent < ApplicationRecord
     where("name LIKE ?", "%#{search}%")
   end
 
+  def name
+    self.user.name
+  end
+
+  def email
+    self.user.email
+  end
+
   def reviews
     Review.joins_table.where('parent_id=?', self.id)
   end
