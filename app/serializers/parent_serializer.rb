@@ -1,4 +1,4 @@
 class ParentSerializer < ActiveModel::Serializer
- attributes :name, :email
+ attributes :kid_count, :address, :specific_needs, :extra_requests
 
 end

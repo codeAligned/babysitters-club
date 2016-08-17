@@ -1,12 +1,6 @@
 class Api::V1::BabysittersController < ApplicationController
 	skip_before_action :authenticate, only: [:create]
 
-	def create
-		babysitter = Babysitter.create(name: params[:name], email: params[:email])
-		# babysitter = Babysitter.create(babysitter_params)
-		render json: babysitter
-	end
-
 	def index
 		render json: Babysitter.all, includes:['parents','requests','bookings', 'booking_requests']
 	end
@@ -18,7 +12,7 @@ class Api::V1::BabysittersController < ApplicationController
 
 	def update
 		babysitter = Babysitter.find(params[:id])
-		babysitter.update(name: params[:name], email: params[:email])
+		babysitter.update(babysitter_params)
 		# (babysitter_params) don't forget patch!
 		render json: babysitter
 	end
@@ -31,7 +25,7 @@ class Api::V1::BabysittersController < ApplicationController
 	private
 
  	def babysitter_params
-	 	params.require(:babysitter).permit(:name, :email)
+	 	params.require(:user).permit(:age, :location, :bio, :skills)
  	end
 
 end

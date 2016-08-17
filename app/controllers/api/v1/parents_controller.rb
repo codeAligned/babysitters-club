@@ -13,8 +13,7 @@ class Api::V1::ParentsController < ApplicationController
 	def update
 		# We need to finish this upon getting session to work
 		parent = Parent.find(params[:id])
-		parent.update(name: params[:name], email: params[:email])
-		# (parents_params) don't forget patch!
+		parent.update(parents_params)
 		render json: parent
 	end
 
@@ -25,8 +24,17 @@ class Api::V1::ParentsController < ApplicationController
 
 	private
 
+<<<<<<< HEAD
+
+	 def parents_params
+		 params.require(:user).permit(:kid_count, :address, :specific_needs, :extra_requests)
+	 end
+
+
+=======
 	def parents_params
 		params.require(:parents).permit(:name, :email)
 	end
+>>>>>>> master
 
 end
