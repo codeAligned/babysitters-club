@@ -34,6 +34,4 @@ class Api::V1::BabysittersController < ApplicationController
 	 	params.require(:babysitter).permit(:name, :email)
  	end
 
-
-
 end
