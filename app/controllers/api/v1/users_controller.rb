@@ -7,8 +7,9 @@ class Api::V1::UsersController < ApplicationController
 
   def create
     user = User.create(user_params)
+    byebug
     # parent = Parent.create(parents_params)
-    if user_type_params[:user_type]=='parent'
+    if user_type_params[:user_type]=='PARENT'
       account = Parent.create({user_id: user.id})
     else
       account = Babysitter.create({user_id: user.id})
