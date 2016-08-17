@@ -18,7 +18,6 @@ class Api::V1::ParentsController < ApplicationController
 	end
 
 	def update
-		byebug
 		parent = Parent.find(params[:id])
 		parent.update(parents_params)
 		render json: parent

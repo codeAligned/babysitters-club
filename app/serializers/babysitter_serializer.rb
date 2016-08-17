@@ -1,5 +1,5 @@
 class BabysitterSerializer < ActiveModel::Serializer
- attributes :name, :email, :age, :location, :bio, :skills
+ attributes :age, :location, :bio, :skills
  belongs_to :user
  # has_many :parents
  # has_many :requests

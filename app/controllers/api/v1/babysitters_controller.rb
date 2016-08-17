@@ -17,8 +17,9 @@ class Api::V1::BabysittersController < ApplicationController
 	end
 
 	def update
+		byebug
 		babysitter = Babysitter.find(params[:id])
-		babysitter.update(name: params[:name], email: params[:email])
+		babysitter.update(babysitter_params)
 		# (babysitter_params) don't forget patch!
 		render json: babysitter
 	end
@@ -31,7 +32,7 @@ class Api::V1::BabysittersController < ApplicationController
 	private
 
  	def babysitter_params
-	 	params.require(:babysitter).permit(:name, :email)
+	 	params.require(:user).permit(:age, :location, :bio, :skills)
  	end
 
 
