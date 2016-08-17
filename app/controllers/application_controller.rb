@@ -7,7 +7,6 @@ class ApplicationController < ActionController::API
 
   def current_user
     if auth_present?
-      byebug
       user = User.find(auth["user"])
       if user
         @current_user ||= user
