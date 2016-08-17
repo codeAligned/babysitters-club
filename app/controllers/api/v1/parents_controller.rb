@@ -1,5 +1,5 @@
 class Api::V1::ParentsController < ApplicationController
-
+	skip_before_action :authenticate, only: [:create]
 
 	def create
 

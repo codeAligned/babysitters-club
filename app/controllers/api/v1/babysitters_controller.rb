@@ -1,5 +1,5 @@
 class Api::V1::BabysittersController < ApplicationController
-
+	skip_before_action :authenticate, only: [:create]
 
 	def create
 		babysitter = Babysitter.create(name: params[:name], email: params[:email])
