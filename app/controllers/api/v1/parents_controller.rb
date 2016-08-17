@@ -1,13 +1,6 @@
 class Api::V1::ParentsController < ApplicationController
 	skip_before_action :authenticate, only: [:create]
 
-	def create
-
-		parent = Parent.create(name: params[:name], email: params[:email])
-		# parent = Parent.create(parents_params)
-		render json: parent
-	end
-
 	def index
 		render json: Parent.all, includes:['babysitters','requests','bookings', 'booking_requests']
 	end
@@ -18,7 +11,6 @@ class Api::V1::ParentsController < ApplicationController
 	end
 
 	def update
-		byebug
 		# We need to finish this upon getting session to work
 		parent = Parent.find(params[:id])
 		parent.update(name: params[:name], email: params[:email])
@@ -33,10 +25,8 @@ class Api::V1::ParentsController < ApplicationController
 
 	private
 
-	 def parents_params
-		 params.require(:parents).permit(:name, :email)
-	 end
-
-
+	def parents_params
+		params.require(:parents).permit(:name, :email)
+	end
 
 end
