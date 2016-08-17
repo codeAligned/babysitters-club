@@ -7,6 +7,7 @@ class ApplicationController < ActionController::API
 
   def current_user
     if auth_present?
+      byebug
       user = User.find(auth["user"])
       if user
         @current_user ||= user
@@ -29,6 +30,7 @@ class ApplicationController < ActionController::API
   end
 
   def auth_present?
+
     !!request.env.fetch("HTTP_AUTHORIZATION", "").scan(/Bearer/).flatten.first
   end
 
