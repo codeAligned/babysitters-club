@@ -27,10 +27,10 @@ class Api::V1::ReviewsController < ApplicationController
     review.delete
   end
 
-private
+  private
 
-  	 def reviews_params
-  		 params.require(:reviews).permit(:parent_babysitter_id, :title, :description, :rating)
-  	 end
+  def reviews_params
+    params.require(:reviews).permit(:parent_babysitter_id, :title, :description, :rating)
+  end
 
 end

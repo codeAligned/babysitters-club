@@ -1,5 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   skip_before_action :authenticate, only: [:create]
+  
   def index
 		users = User.all
 		render json: users
@@ -21,21 +22,15 @@ class Api::V1::UsersController < ApplicationController
     byebug
   end
 
-
-
-
-
-
-
-
   private
 
-   def user_params
-     params.require(:user).permit(:name, :email, :username, :password)
-    #  {"user"=>{"name"=>"Clark Sacktor", "email"=>"csacktor@oberlin.edu", "username"=>"csacktor", "password"=>"123", "user_type"=>""}
-   end
+  def user_params
+    params.require(:user).permit(:name, :email, :username, :password)
+    # {"user"=>{"name"=>"Clark Sacktor", "email"=>"csacktor@oberlin.edu", "username"=>"csacktor", "password"=>"123", "user_type"=>""}
+  end
 
-   def user_type_params
-     params.require(:user).permit(:user_type)
-   end
+  def user_type_params
+    params.require(:user).permit(:user_type)
+  end
+
 end

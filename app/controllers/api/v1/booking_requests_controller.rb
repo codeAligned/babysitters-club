@@ -20,11 +20,10 @@ class Api::V1::BookingRequestsController < ApplicationController
     request.delete
   end
 
-private
+  private
 
-	 def booking_requests_params
-		 params.require(:booking_requests).permit(:parent_id, :babysitter_id, :duration, :desired_time)
-	 end
-
+  def booking_requests_params
+    params.require(:booking_requests).permit(:parent_id, :babysitter_id, :duration, :desired_time)
+  end
 
 end
