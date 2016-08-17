@@ -5,11 +5,11 @@ class Api::V1::SessionsController < ApplicationController
 
   def create
     user = User.find_by(email: auth_params[:email])
+
     if user != nil
       if user.authenticate(auth_params[:password])
         jwt = Auth.issue({user: user.id})
-        byebug
-        render json: {jwt: jwt, current_user: user}
+        render json: {jwt: jwt, current_user: user, account: user.associated_user, type: user.type}
       else
         render json: {error: "unauthorized"}, status: 404
       end
