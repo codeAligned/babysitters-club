@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20160816151054) do
   create_table "bookings", force: :cascade do |t|
     t.integer  "parent_id"
     t.integer  "babysitter_id"
+    t.datetime "datetime"
     t.integer  "duration"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
@@ -71,13 +72,6 @@ ActiveRecord::Schema.define(version: 20160816151054) do
     t.integer  "babysitter_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-  end
-
-  create_table "reviews", force: :cascade do |t|
-    t.integer "parent_babysitter_id"
-    t.string  "title"
-    t.string  "description"
-    t.integer "rating"
   end
 
   create_table "users", force: :cascade do |t|
