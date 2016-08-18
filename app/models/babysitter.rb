@@ -16,12 +16,32 @@ class Babysitter < ApplicationRecord
         user_id: parent.user_id, 
         name: parent.name,
         email: parent.email, 
-        location: parent.location,
-        bio: parent.bio,
-        skills: parent.skills
+        address: parent.address,
+        kid_count: parent.kid_count,
+        specific_needs: parent.specific_needs,
+        extra_requests: parent.extra_requests
       }
     end 
   end 
+
+  def network_requests  
+    self.requests.map do |request| 
+      {id: request.id,
+        parent: Parent.find(request.parent_id), 
+        parent_name: Parent.find(request.parent_id).name
+      }
+    end 
+  end 
+
+   def booking_requests
+    self.bookings.map do |booking| 
+      {id: booking.id,
+        babysitter: Parent.find(booking.parent_id), 
+        babysitter_name: Babysitter.find(booking.parent_id).name
+      }
+    end 
+  end
+
 
   def total_review_number
     total = 0

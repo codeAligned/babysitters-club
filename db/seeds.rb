@@ -21,6 +21,7 @@ user_chris = User.create(username: 'chris', name: 'Chris', email: 'chris@chris.c
 user_dan = User.create(username: 'dan', name: 'Dan', email: 'dan@dan.com', password: 'dan')
 
 
+
 tom = Parent.create(user: user_tom, kid_count: 5, specific_needs: 'bring food', extra_requests: 'bring lots of food')
 craig = Parent.create(user: user_craig, kid_count: 2, specific_needs: 'bring movies', extra_requests: 'be happy')
 chris = Parent.create(user: user_chris, kid_count: 3, specific_needs: 'bring TV', extra_requests: 'dont be sad')
