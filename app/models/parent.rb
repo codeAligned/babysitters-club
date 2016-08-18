@@ -7,7 +7,7 @@ class Parent < ApplicationRecord
   has_many :requests
 
   def self.search(search)
-    where("name LIKE ?", "%#{search}%")
+    User.joins_table_parents.where("name LIKE ?", search.capitalize)
   end
 
   def name
@@ -15,36 +15,35 @@ class Parent < ApplicationRecord
   end
 
   def network
-    self.babysitters.map do |babysitter| 
-      {id: babysitter.id, 
-        user_id: babysitter.user_id, 
+    self.babysitters.map do |babysitter|
+      {id: babysitter.id,
+        user_id: babysitter.user_id,
         name: babysitter.name,
-        email: babysitter.email, 
+        email: babysitter.email,
         location: babysitter.location,
         bio: babysitter.bio,
         skills: babysitter.skills
       }
-    end 
-  end 
-
-  def network_requests
-    self.requests.map do |request| 
-      {id: request.id,
-        babysitter: Babysitter.find(request.babysitter_id), 
-        babysitter_name: Babysitter.find(request.babysitter_id).name
-      }
-    end 
-  end 
-
-  def booking_requests
-    self.bookings.map do |booking| 
-      {id: booking.id,
-        babysitter: Babysitter.find(booking.babysitter_id), 
-        babysitter_name: Babysitter.find(booking.babysitter_id).name
-      }
-    end 
+    end
   end
 
+  def network_requests
+    self.requests.map do |request|
+      {id: request.id,
+        babysitter: Babysitter.find(request.babysitter_id),
+        babysitter_name: Babysitter.find(request.babysitter_id).name
+      }
+    end
+  end
+
+  def booking_requests
+    self.bookings.map do |booking|
+      {id: booking.id,
+        babysitter: Babysitter.find(booking.babysitter_id),
+        babysitter_name: Babysitter.find(booking.babysitter_id).name
+      }
+    end
+  end
 
   def email
     self.user.email
@@ -53,6 +52,5 @@ class Parent < ApplicationRecord
   def reviews
     Review.joins_table.where('parent_id=?', self.id)
   end
-
 
 end
