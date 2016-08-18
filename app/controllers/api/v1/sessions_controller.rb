@@ -13,7 +13,7 @@ class Api::V1::SessionsController < ApplicationController
             parent: user.associated_user,
             network: user.associated_user.network,
             network_requests: user.associated_user.network_requests,
-            confirmed_requests: user.associated_user.confirmed_requests,
+            confirmed_bookings: user.associated_user.confirmed_bookings,
             requested_bookings: user.associated_user.requested_bookings
           }}
         else
@@ -21,7 +21,8 @@ class Api::V1::SessionsController < ApplicationController
             babysitter: user.associated_user,
             network: user.associated_user.network,
             network_requests: user.associated_user.network_requests,
-            booking_requests: user.associated_user.bookings
+            confirmed_bookings: user.associated_user.confirmed_bookings,
+            requested_bookings: user.associated_user.requested_bookings
           }}
         end
 
