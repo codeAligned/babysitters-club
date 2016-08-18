@@ -1,5 +1,5 @@
 class Api::V1::ParentsController < ApplicationController
-	skip_before_action :authenticate, only: [:create]
+	skip_before_action :authenticate, only: [:create, :index]
 
 	def create
 
@@ -9,7 +9,7 @@ class Api::V1::ParentsController < ApplicationController
 	end
 
 	def index
-		debugger
+		byebug
 		render json: Parent.all
 	end
 
