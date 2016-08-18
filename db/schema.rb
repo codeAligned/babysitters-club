@@ -74,6 +74,13 @@ ActiveRecord::Schema.define(version: 20160816151054) do
     t.datetime "updated_at",    null: false
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.integer "parent_babysitter_id"
+    t.string  "title"
+    t.string  "description"
+    t.integer "rating"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "username",        limit: 30
     t.string   "name"
