@@ -18,6 +18,19 @@ class Parent < ApplicationRecord
     self.babysitters
   end
 
+  def network
+    self.babysitters.map do |babysitter| 
+      {id: babysitter.id, 
+        user_id: babysitter.user_id, 
+        name: babysitter.name,
+        email: babysitter.email, 
+        location: babysitter.location,
+        bio: babysitter.bio,
+        skills: babysitter.skills
+      }
+    end 
+  end 
+
   def email
     self.user.email
   end
