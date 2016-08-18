@@ -11,17 +11,17 @@ class Babysitter < ApplicationRecord
   end
 
   def network
-    self.parents.map do |parent| 
-      {id: parent.id, 
-        user_id: parent.user_id, 
+    self.parents.map do |parent|
+      {id: parent.id,
+        user_id: parent.user_id,
         name: parent.name,
-        email: parent.email, 
-        location: parent.location,
+        email: parent.email,
+        location: parent.address,
         bio: parent.bio,
         skills: parent.skills
       }
-    end 
-  end 
+    end
+  end
 
   def total_review_number
     total = 0
