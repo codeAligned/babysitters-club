@@ -1,6 +1,13 @@
 class Api::V1::ParentsController < ApplicationController
 	skip_before_action :authenticate, only: [:create]
 
+	def create
+
+		parent = Parent.create(name: params[:name], email: params[:email])
+		# parent = Parent.create(parents_params)
+		render json: parent
+	end
+
 	def index
 		debugger
 		render json: Parent.all
@@ -12,7 +19,6 @@ class Api::V1::ParentsController < ApplicationController
 	end
 
 	def update
-		# We need to finish this upon getting session to work
 		parent = Parent.find(params[:id])
 		parent.update(parents_params)
 		render json: parent
