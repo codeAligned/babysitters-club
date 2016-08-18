@@ -13,17 +13,16 @@ class Api::V1::SessionsController < ApplicationController
             parent: user.associated_user,
             network: user.associated_user.network,
             network_requests: user.associated_user.network_requests,
-            booking_requests: user.associated_user.booking_requests
-
-            }}
-
-          else
-            render json: {jwt: jwt, current_user: user, type: user.type, account: {
-              babysitter: user.associated_user,
-              network: user.associated_user.network,
-              network_requests: user.associated_user.network_requests,
-              booking_requests: user.associated_user.bookings
-              }}
+            confirmed_requests: user.associated_user.confirmed_requests,
+            requested_bookings: user.associated_user.requested_bookings
+          }}
+        else
+          render json: {jwt: jwt, current_user: user, type: user.type, account: {
+            babysitter: user.associated_user,
+            network: user.associated_user.network,
+            network_requests: user.associated_user.network_requests,
+            booking_requests: user.associated_user.bookings
+          }}
         end
 
       else
