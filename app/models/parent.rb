@@ -15,10 +15,6 @@ class Parent < ApplicationRecord
   end
 
   def network
-    self.babysitters
-  end
-
-  def network
     self.babysitters.map do |babysitter| 
       {id: babysitter.id, 
         user_id: babysitter.user_id, 
@@ -27,6 +23,15 @@ class Parent < ApplicationRecord
         location: babysitter.location,
         bio: babysitter.bio,
         skills: babysitter.skills
+      }
+    end 
+  end 
+
+  def network_requests
+    self.requests.map do |request| 
+      {id: request.id,
+        babysitter: Babysitter.find(request.babysitter_id), 
+        babysitter_name: Babysitter.find(request.babysitter_id).name
       }
     end 
   end 

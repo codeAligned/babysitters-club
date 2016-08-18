@@ -23,6 +23,19 @@ class Babysitter < ApplicationRecord
     end 
   end 
 
+
+
+  def network_requests
+    
+    self.requests.map do |request| 
+      {id: request.id,
+        parent: parent.find(request.parent_id), 
+        parent_name: Parent.find(request.parent_id).name
+      }
+    end 
+  end 
+
+
   def total_review_number
     total = 0
     # use a higher level iterator here (inject?)
