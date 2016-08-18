@@ -15,10 +15,10 @@ Babysitter.destroy_all
 
 
 
-tom = Parent.create(name: "Tom", email: 'tom@tom.com')
-jason = Parent.create(name: "Jason", email: 'jason@jason.com')
-craig = Parent.create(name: "Craig", email: 'craig@craig.com')
-chris = Parent.create(name: "Chris", email: 'chris@chris.com')
+tom = Parent.create(name: "Tom", kid_count: 3, location:'nyc', email: 'tom@tom.com')
+jason = Parent.create(name: "Jason", kid_count: 4, location:'co', email: 'jason@jason.com')
+craig = Parent.create(name: "Craig", kid_count: 5, location:'oh', email: 'craig@craig.com')
+chris = Parent.create(name: "Chris", kid_count: 6, location:'mt', email: 'chris@chris.com')
 
 jess = Babysitter.create(name: 'Jessie', email: 'jess@jess.com')
 sam = Babysitter.create(name: 'Sam', email: 'sam@sam.com')
