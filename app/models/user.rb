@@ -15,4 +15,12 @@ class User < ApplicationRecord
     associated_user.class.to_s
   end
 
+  def self.joins_table_parents 
+    self.joins(:parent)
+  end 
+
+  def self.joins_table_babysitter
+    self.joins(:babysitter)
+  end
+
 end
