@@ -36,6 +36,16 @@ class Parent < ApplicationRecord
     end 
   end 
 
+  def booking_requests
+    self.bookings.map do |booking| 
+      {id: booking.id,
+        babysitter: Babysitter.find(booking.babysitter_id), 
+        babysitter_name: Babysitter.find(booking.babysitter_id).name
+      }
+    end 
+  end
+
+
   def email
     self.user.email
   end
