@@ -7,7 +7,7 @@ class Parent < ApplicationRecord
   has_many :requests
 
   def self.search(search)
-    where("name LIKE ?", "%#{search}%")
+    User.joins_table_parents.where("name LIKE ?", search.capitalize)
   end
 
   def name
@@ -19,17 +19,17 @@ class Parent < ApplicationRecord
   end
 
   def network
-    self.babysitters.map do |babysitter| 
-      {id: babysitter.id, 
-        user_id: babysitter.user_id, 
+    self.babysitters.map do |babysitter|
+      {id: babysitter.id,
+        user_id: babysitter.user_id,
         name: babysitter.name,
-        email: babysitter.email, 
+        email: babysitter.email,
         location: babysitter.location,
         bio: babysitter.bio,
         skills: babysitter.skills
       }
-    end 
-  end 
+    end
+  end
 
   def email
     self.user.email

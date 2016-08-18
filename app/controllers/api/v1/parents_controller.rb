@@ -1,5 +1,5 @@
 class Api::V1::ParentsController < ApplicationController
-	skip_before_action :authenticate, only: [:create]
+	skip_before_action :authenticate, only: [:create, :index]
 
 	def create
 
@@ -9,7 +9,8 @@ class Api::V1::ParentsController < ApplicationController
 	end
 
 	def index
-		render json: Parent.all, includes:['babysitters','requests','bookings', 'booking_requests']
+		parents = Parent.search(search_params[:searchValue])
+		render json: parents
 	end
 
 	def show
@@ -30,10 +31,13 @@ class Api::V1::ParentsController < ApplicationController
 
 	private
 
+	def search_params
+		params.require(:parent).permit(:searchValue)
+	end
 
-	 def parents_params
-		 params.require(:user).permit(:kid_count, :address, :specific_needs, :extra_requests)
-	 end
+	def parents_params
+		params.require(:user).permit(:address, :kid_count, :specific_needs, :extra_requests)
+	end
 
 
 
