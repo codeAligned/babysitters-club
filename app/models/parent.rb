@@ -15,10 +15,6 @@ class Parent < ApplicationRecord
   end
 
   def network
-    self.babysitters
-  end
-
-  def network
     self.babysitters.map do |babysitter|
       {id: babysitter.id,
         user_id: babysitter.user_id,
@@ -31,6 +27,24 @@ class Parent < ApplicationRecord
     end
   end
 
+  def network_requests
+    self.requests.map do |request|
+      {id: request.id,
+        babysitter: Babysitter.find(request.babysitter_id),
+        babysitter_name: Babysitter.find(request.babysitter_id).name
+      }
+    end
+  end
+
+  def booking_requests
+    self.bookings.map do |booking|
+      {id: booking.id,
+        babysitter: Babysitter.find(booking.babysitter_id),
+        babysitter_name: Babysitter.find(booking.babysitter_id).name
+      }
+    end
+  end
+
   def email
     self.user.email
   end
@@ -38,6 +52,5 @@ class Parent < ApplicationRecord
   def reviews
     Review.joins_table.where('parent_id=?', self.id)
   end
-
 
 end

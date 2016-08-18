@@ -1,5 +1,3 @@
-
-
 class Api::V1::SessionsController < ApplicationController
   skip_before_action :authenticate
 
@@ -14,8 +12,8 @@ class Api::V1::SessionsController < ApplicationController
           render json: {jwt: jwt, current_user: user, type: user.type, account: {
             parent: user.associated_user,
             network: user.associated_user.network,
-            requests: user.associated_user.requests,
-            bookings: user.associated_user.bookings
+            network_requests: user.associated_user.network_requests,
+            booking_requests: user.associated_user.booking_requests
 
             }}
 
@@ -23,8 +21,8 @@ class Api::V1::SessionsController < ApplicationController
             render json: {jwt: jwt, current_user: user, type: user.type, account: {
               babysitter: user.associated_user,
               network: user.associated_user.network,
-              requests: user.associated_user.requests,
-              bookings: user.associated_user.bookings
+              network_requests: user.associated_user.network_requests,
+              booking_requests: user.associated_user.bookings
               }}
         end
 
