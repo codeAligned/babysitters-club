@@ -9,7 +9,25 @@ class Api::V1::SessionsController < ApplicationController
     if user != nil
       if user.authenticate(auth_params[:password])
         jwt = Auth.issue({user: user.id})
-        render json: {jwt: jwt, current_user: user, account: user.associated_user, type: user.type}
+
+        if user.type=='Parent'
+          render json: {jwt: jwt, current_user: user, type: user.type, account: {
+            parent: user.associated_user,
+            network: user.associated_user.babysitters,
+            requests: user.associated_user.requests,
+            bookings: user.associated_user.bookings
+
+            }}
+
+          else
+            render json: {jwt: jwt, current_user: user, type: user.type, account: {
+              babysitter: user.associated_user,
+              network: user.associated_user.parents,
+              requests: user.associated_user.requests,
+              bookings: user.associated_user.bookings
+              }}
+        end
+
       else
         render json: {error: "unauthorized"}, status: 404
       end

@@ -14,6 +14,10 @@ class Parent < ApplicationRecord
     self.user.name
   end
 
+  def network
+    self.babysitters
+  end
+
   def email
     self.user.email
   end
