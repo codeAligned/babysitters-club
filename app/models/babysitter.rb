@@ -10,6 +10,19 @@ class Babysitter < ApplicationRecord
     Review.joins_table.where('babysitter_id=?', self.id)
   end
 
+  def network
+    self.parents.map do |parent| 
+      {id: parent.id, 
+        user_id: parent.user_id, 
+        name: parent.name,
+        email: parent.email, 
+        location: parent.location,
+        bio: parent.bio,
+        skills: parent.skills
+      }
+    end 
+  end 
+
   def total_review_number
     total = 0
     # use a higher level iterator here (inject?)

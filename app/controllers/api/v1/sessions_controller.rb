@@ -13,7 +13,7 @@ class Api::V1::SessionsController < ApplicationController
         if user.type=='Parent'
           render json: {jwt: jwt, current_user: user, type: user.type, account: {
             parent: user.associated_user,
-            network: user.associated_user.babysitters,
+            network: user.associated_user.network,
             requests: user.associated_user.requests,
             bookings: user.associated_user.bookings
 
@@ -22,7 +22,7 @@ class Api::V1::SessionsController < ApplicationController
           else
             render json: {jwt: jwt, current_user: user, type: user.type, account: {
               babysitter: user.associated_user,
-              network: user.associated_user.parents,
+              network: user.associated_user.network,
               requests: user.associated_user.requests,
               bookings: user.associated_user.bookings
               }}
