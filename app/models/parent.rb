@@ -16,6 +16,10 @@ class Parent < ApplicationRecord
     self.user.id
   end
 
+  def username
+    self.user.username
+  end
+
   def name
     self.user.name
   end
