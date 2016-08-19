@@ -44,8 +44,8 @@ class Parent < ApplicationRecord
         id: booking.id,
         time: booking.desired_time,
         duration: booking.duration,
-        babysitter: booking.babysitter,
-        babysitter_name: booking.babysitter.name
+        account: booking.babysitter,
+        name: booking.babysitter.name
       }
     end
   end
@@ -56,8 +56,8 @@ class Parent < ApplicationRecord
         id: booking_request.id,
         time: booking_request.desired_time,
         duration: booking_request.duration,
-        babysitter: booking_request.babysitter,
-        babysitter_name: booking_request.babysitter.name
+        account: booking_request.babysitter,
+        name: booking_request.babysitter.name
       }
     end
   end
