@@ -20,6 +20,11 @@ class Api::V1::UsersController < ApplicationController
     byebug
   end
 
+  def show
+    byebug
+
+  end
+
   private
 
   def user_params
@@ -30,5 +35,7 @@ class Api::V1::UsersController < ApplicationController
   def user_type_params
     params.require(:user).permit(:user_type)
   end
+
+
 
 end
