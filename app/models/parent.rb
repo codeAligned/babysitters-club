@@ -16,7 +16,8 @@ class Parent < ApplicationRecord
 
   def network
     self.babysitters.map do |babysitter|
-      {id: babysitter.id,
+      {
+        id: babysitter.id,
         user_id: babysitter.user_id,
         name: babysitter.name,
         email: babysitter.email,
@@ -29,18 +30,34 @@ class Parent < ApplicationRecord
 
   def network_requests
     self.requests.map do |request|
-      {id: request.id,
-        babysitter: Babysitter.find(request.babysitter_id),
-        babysitter_name: Babysitter.find(request.babysitter_id).name
+      {
+        id: request.id,
+        babysitter: request.babysitter,
+        babysitter_name: request.babysitter.name
       }
     end
   end
 
-  def booking_requests
+  def confirmed_bookings
     self.bookings.map do |booking|
-      {id: booking.id,
-        babysitter: Babysitter.find(booking.babysitter_id),
-        babysitter_name: Babysitter.find(booking.babysitter_id).name
+      {
+        id: booking.id,
+        time: booking.desired_time,
+        duration: booking.duration,
+        babysitter: booking.babysitter,
+        babysitter_name: booking.babysitter.name
+      }
+    end
+  end
+
+  def requested_bookings
+    self.booking_requests.map do |booking_request|
+      {
+        id: booking_request.id,
+        time: booking_request.desired_time,
+        duration: booking_request.duration,
+        babysitter: booking_request.babysitter,
+        babysitter_name: booking_request.babysitter.name
       }
     end
   end
