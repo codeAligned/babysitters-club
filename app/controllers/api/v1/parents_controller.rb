@@ -9,6 +9,7 @@ class Api::V1::ParentsController < ApplicationController
 	end
 
 	def index
+		
 		parents = Parent.search(search_params[:searchValue])
 		render json: parents
 	end
@@ -32,7 +33,7 @@ class Api::V1::ParentsController < ApplicationController
 	private
 
 	def search_params
-		params.require(:parent).permit(:searchValue)
+		params.require(:parents).permit(:searchValue)
 	end
 
 	def parents_params
