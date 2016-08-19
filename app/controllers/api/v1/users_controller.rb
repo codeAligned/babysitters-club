@@ -17,12 +17,22 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def update
-    byebug
+
   end
 
   def show
-    byebug
-
+    user = User.find(viewable_user_id_params[:id])
+    if user.type=='Parent'
+      render json: {current_user: user, type: user.type, account: {
+        parent: user.associated_user,
+        network: user.associated_user.network
+      }}
+    else
+      render json: {current_user: user, type: user.type, account: {
+        babysitter: user.associated_user,
+        network: user.associated_user.network
+      }}
+    end
   end
 
   private
@@ -35,6 +45,11 @@ class Api::V1::UsersController < ApplicationController
   def user_type_params
     params.require(:user).permit(:user_type)
   end
+
+  def viewable_user_id_params
+    params.require(:user).permit(:id)
+  end
+
 
 
 
