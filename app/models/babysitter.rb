@@ -11,35 +11,52 @@ class Babysitter < ApplicationRecord
   end
 
   def network
-    self.parents.map do |parent| 
-      {id: parent.id, 
-        user_id: parent.user_id, 
+    self.parents.map do |parent|
+      {
+        id: parent.id,
+        user_id: parent.user_id,
         name: parent.name,
-        email: parent.email, 
+        email: parent.email,
         address: parent.address,
         kid_count: parent.kid_count,
         specific_needs: parent.specific_needs,
         extra_requests: parent.extra_requests
       }
-    end 
-  end 
+    end
+  end
 
-  def network_requests  
-    self.requests.map do |request| 
-      {id: request.id,
-        parent: Parent.find(request.parent_id), 
-        parent_name: Parent.find(request.parent_id).name
+  def network_requests
+    self.requests.map do |request|
+      {
+        id: request.id,
+        parent: request.parent,
+        parent_name: request.parent.name
       }
-    end 
-  end 
+    end
+  end
 
-   def booking_requests
-    self.bookings.map do |booking| 
-      {id: booking.id,
-        babysitter: Parent.find(booking.parent_id), 
-        babysitter_name: Babysitter.find(booking.parent_id).name
+   def requested_bookings
+    self.bookings.map do |booking|
+      {
+        id: booking.id,
+        time: booking.desired_time,
+        duration: booking.duration,
+        account: booking.parent,
+        name: booking.parent.name
       }
-    end 
+    end
+  end
+
+  def confirmed_bookings
+    self.booking_requests.map do |booking_request|
+      {
+        id: booking_request.id,
+        time: booking_request.desired_time,
+        duration: booking_request.duration,
+        account: booking_request.parent,
+        name: booking_request.parent.name
+      }
+    end
   end
 
 
