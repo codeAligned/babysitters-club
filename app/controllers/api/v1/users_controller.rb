@@ -23,12 +23,12 @@ class Api::V1::UsersController < ApplicationController
   def show
     user = User.find(viewable_user_id_params[:id])
     if user.type=='Parent'
-      render json: {current_user: user, type: user.type, account: {
+      render json: {viewable_user: user, type: user.type, account: {
         parent: user.associated_user,
         network: user.associated_user.network
       }}
     else
-      render json: {current_user: user, type: user.type, account: {
+      render json: {viewable_user: user, type: user.type, account: {
         babysitter: user.associated_user,
         network: user.associated_user.network
       }}
