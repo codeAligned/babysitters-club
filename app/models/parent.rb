@@ -7,7 +7,13 @@ class Parent < ApplicationRecord
   has_many :requests
 
   def self.search(search)
-    User.joins_table_parents.where("name LIKE ?", search.capitalize)
+    Parent.all.select do |parent|
+      parent.name.downcase==search.downcase
+    end
+  end
+
+  def user_id
+    self.user.id
   end
 
   def name
