@@ -1,4 +1,5 @@
 class Api::V1::ReviewsController < ApplicationController
+  skip_before_action :authenticate, only: [:create]
   def index
     reviews = Review.all
     render json: reviews
@@ -10,8 +11,11 @@ class Api::V1::ReviewsController < ApplicationController
   end
 
   def create
-    review = Review.create({parent_babysitter_id: params[:parent_babysitter_id].to_i, title: params[:title], description: params[:description], rating: params[:rating].to_i})
-    		# parent = Parent.create(parents_params)
+    review = Review.create(review_params)
+    review.parent_babysitter_id = 7
+    review.save
+
+    byebug
     render json: review
   end
 
@@ -29,8 +33,8 @@ class Api::V1::ReviewsController < ApplicationController
 
   private
 
-  def reviews_params
-    params.require(:reviews).permit(:parent_babysitter_id, :title, :description, :rating)
+  def review_params
+    params.require(:review).permit(:title, :description, :rating)
   end
 
 end
