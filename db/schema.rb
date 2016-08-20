@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160816151054) do
+ActiveRecord::Schema.define(version: 20160820172830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,7 +32,8 @@ ActiveRecord::Schema.define(version: 20160816151054) do
     t.integer  "duration"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.datetime "desired_time"
+    t.string   "desired_time"
+    t.string   "desired_date"
     t.index ["babysitter_id"], name: "index_booking_requests_on_babysitter_id", using: :btree
     t.index ["parent_id"], name: "index_booking_requests_on_parent_id", using: :btree
   end
@@ -40,6 +41,7 @@ ActiveRecord::Schema.define(version: 20160816151054) do
   create_table "bookings", force: :cascade do |t|
     t.integer  "parent_id"
     t.integer  "babysitter_id"
+    t.datetime "datetime"
     t.integer  "duration"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false

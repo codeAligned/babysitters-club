@@ -12,10 +12,7 @@ class Api::V1::BookingRequestsController < ApplicationController
   def create
     byebug
 
-    request = BookingRequest.create(id: params[:id])
-#{parent_id: params[:parent_id].to_i, babysitter_id: params[:babysitter_id].to_i, duration: params[:duration].to_i}
-
-        # parent = Parent.create(parents_params) #dont forget desired time
+    request = BookingRequest.create(booking_requests_params)
     render json: request
   end
 
@@ -28,7 +25,7 @@ class Api::V1::BookingRequestsController < ApplicationController
 private
 
 	 def booking_requests_params
-		 params.require(:user).permit(:id, :babysitter_id, :duration, :desired_time)
+		 params.require(:bookings).permit(:parent_id, :babysitter_id, :duration, :desired_time)
 	 end
 
 
