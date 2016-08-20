@@ -40,6 +40,7 @@ class Babysitter < ApplicationRecord
       {
         id: booking.id,
         time: booking.desired_time,
+        date: booking.desired_date,
         duration: booking.duration,
         account: booking.parent,
         name: booking.parent.name
@@ -52,6 +53,7 @@ class Babysitter < ApplicationRecord
       {
         id: booking_request.id,
         time: booking_request.desired_time,
+        date: booking_request.desired_date,
         duration: booking_request.duration,
         account: booking_request.parent,
         name: booking_request.parent.name
