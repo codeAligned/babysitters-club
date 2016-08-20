@@ -35,7 +35,7 @@ class Babysitter < ApplicationRecord
     end
   end
 
-   def requested_bookings
+   def confirmed_bookings
     self.bookings.map do |booking|
       {
         id: booking.id,
@@ -47,7 +47,7 @@ class Babysitter < ApplicationRecord
     end
   end
 
-  def confirmed_bookings
+  def requested_bookings
     self.booking_requests.map do |booking_request|
       {
         id: booking_request.id,

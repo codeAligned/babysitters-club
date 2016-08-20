@@ -21,7 +21,6 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-    byebug
     user = User.find(viewable_user_id_params[:id])
     if user.type=='Parent'
       render json: {viewable_user: user, type: user.type, account: {
@@ -31,7 +30,8 @@ class Api::V1::UsersController < ApplicationController
     else
       render json: {viewable_user: user, type: user.type, account: {
         babysitter: user.associated_user,
-        network: user.associated_user.network
+        network: user.associated_user.network,
+        reviews: user.associated_user.reviews
       }}
     end
   end
