@@ -21,6 +21,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
+    byebug
     user = User.find(viewable_user_id_params[:id])
     if user.type=='Parent'
       render json: {viewable_user: user, type: user.type, account: {
