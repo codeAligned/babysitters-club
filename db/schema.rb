@@ -41,7 +41,6 @@ ActiveRecord::Schema.define(version: 20160820172830) do
   create_table "bookings", force: :cascade do |t|
     t.integer  "parent_id"
     t.integer  "babysitter_id"
-    t.datetime "datetime"
     t.integer  "duration"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false

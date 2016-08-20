@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users
       resources :booking_requests
+      resources :bookings
       resources :reviews
       resources :parents, :babysitters, :requests
       post '/login', to: "sessions#create"
