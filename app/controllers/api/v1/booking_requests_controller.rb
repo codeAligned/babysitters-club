@@ -25,7 +25,7 @@ class Api::V1::BookingRequestsController < ApplicationController
 private
 
 	 def booking_requests_params
-		 params.require(:bookings).permit(:parent_id, :babysitter_id, :duration, :desired_time)
+		 params.require(:bookings).permit(:parent_id, :babysitter_id, :duration, :desired_time, :desired_date)
 	 end
 
 

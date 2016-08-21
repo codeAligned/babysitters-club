@@ -53,6 +53,7 @@ class Parent < ApplicationRecord
       {
         id: booking.id,
         time: booking.desired_time,
+        date: booking.desired_date,
         duration: booking.duration,
         account: booking.babysitter,
         name: booking.babysitter.name
@@ -65,6 +66,7 @@ class Parent < ApplicationRecord
       {
         id: booking_request.id,
         time: booking_request.desired_time,
+        date: booking_request.desired_date,
         duration: booking_request.duration,
         account: booking_request.babysitter,
         name: booking_request.babysitter.name
