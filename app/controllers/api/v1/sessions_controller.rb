@@ -34,10 +34,39 @@ class Api::V1::SessionsController < ApplicationController
     end
   end
 
+  def show
+    user = User.find(retrieve_params[:id])
+
+    if user != nil
+      if user.type=='Parent'
+        render json: {jwt: jwt, current_user: user, type: user.type, account: {
+          parent: user.associated_user,
+          network: user.associated_user.network,
+          network_requests: user.associated_user.network_requests,
+          confirmed_bookings: user.associated_user.confirmed_bookings,
+          requested_bookings: user.associated_user.requested_bookings
+        }}
+      else
+        render json: {jwt: jwt, current_user: user, type: user.type, account: {
+          babysitter: user.associated_user,
+          network: user.associated_user.network,
+          network_requests: user.associated_user.network_requests,
+          confirmed_bookings: user.associated_user.confirmed_bookings,
+          requested_bookings: user.associated_user.requested_bookings
+        }}
+      end
+    else
+      render json: {error: "user does not exist"}, status: 404
+    end
+  end
 
   private
 
   def auth_params
     params.require(:auth).permit(:email, :password)
+  end
+
+  def retrieve_params
+    params.require(:auth).permit(:id)
   end
 end
