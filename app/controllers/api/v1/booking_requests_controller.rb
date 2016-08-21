@@ -10,8 +10,6 @@ class Api::V1::BookingRequestsController < ApplicationController
   end
 
   def create
-    byebug
-
     request = BookingRequest.create(booking_requests_params)
     render json: request
   end
