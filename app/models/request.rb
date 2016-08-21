@@ -5,9 +5,11 @@ class Request < ApplicationRecord
 
 # Something like this feels like it belongs in a service object.  Remember our models should just answer questions about the data.
 
-  def accept
-    ParentBabysitter.create({parent_id: self.parent_id, babysitter_id: self.babysitter_id})
-    # request disappears
+  def self.accept(id)
+    byebug
+    request = Request.find(id)
+    ParentBabysitter.create({parent_id: request.parent_id, babysitter_id: request.babysitter_id})
+    request.destroy
   end
 
   def self.all_babysitter_request(babysitter_id)
