@@ -62,7 +62,7 @@ Booking.create(parent: dan, babysitter: matt)
 Booking.create(parent: craig, babysitter: sam)
 Booking.create(parent: chris, babysitter: matt)
 Booking.create(parent: chris, babysitter: jess)
-Booking.create(parent: tom, babysitter: jess)
+
 
 Review.create(parent_babysitter: tom_jess, title: "great", description: "really awesome", rating: 4)
 Review.create(parent_babysitter: craig_sam, title: "Bad", description: "really not good", rating: 1)
