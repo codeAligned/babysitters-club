@@ -6,17 +6,18 @@ class Api::V1::RequestsController < ApplicationController
 	end
 
 	def create
+		byebug
 		request = Request.create({
-			parent_id: params[:parent_id].to_i,
-			babysitter_id: params[:babysitter_id].to_i
+			parent_id: request_params[:parent_id],
+			babysitter_id: request_params[:babysitter_id]
 		})
 		render json: request
 	end
 
 	private
 
-	def requests_params
-		params.require(:requests).permit(:parent_id, :babysitter_id)
+	def request_params
+		params.require(:request).permit(:parent_id, :babysitter_id)
 	end
 
 end
