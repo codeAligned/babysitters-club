@@ -1,9 +1,7 @@
 class Api::V1::BookingsController < ApplicationController
 
   def create
-    
     bookingrequest = BookingRequest.find(booking_requests_params[:id])
-    byebug
     request = BookingRequest.accept(bookingrequest)
     render json: request
   end
