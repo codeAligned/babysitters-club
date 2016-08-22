@@ -14,6 +14,50 @@ Parent.destroy_all
 Babysitter.destroy_all
 User.destroy_all
 
+# Create users who are parents
+150.times do
+  name = Faker::Name.name
+  username = user.downcase.delete(' ')
+  user = FactoryGirl.create(:user,
+    name: user,
+    username: username,
+    email: "#{username}@example.com",
+    password: "password"
+  )
+  FactoryGirl.create(:parent,
+    user_id: user.id,
+    address: Faker::Address.street_address,
+    kid_count: Random.rand(1..6)
+    specific_needs: Faker::Lorem.sentence(3),
+    extra_requests: Faker::Lorem.sentence(3)
+  )
+end
+
+# Create users who are babysitters
+50.times do
+  name = Faker::Name.name
+  username = user.downcase.delete(' ')
+  user = FactoryGirl.create(:user,
+    name: user,
+    username: username,
+    email: "#{username}@example.com",
+    password: "password"
+  )
+  FactoryGirl.create(:babysitter,
+    user_id: user.id,
+    age: Random.rand(18..100),
+    location: Faker::Address.street_name,
+    bio: Faker::Lorem.sentence(3),
+    skills: Faker::Lorem.sentence(3)
+  )
+end
+
+# Randomly create requests between babysitters and parents
+
+# Randomly accept a certain number of those, so that the relationships are created
+
+# Randomly create booking_requests
+
 
 user_tom = User.create(username: 'tom', name: 'Tom', email: 'tom@tom.com', password: 'tom')
 user_craig = User.create(username: 'craig', name: 'Craig', email: 'craig@craig.com', password: 'craig')
