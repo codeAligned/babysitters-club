@@ -19,7 +19,7 @@ User.destroy_all
   name = Faker::Name.name
   username = user.downcase.delete(' ')
   user = FactoryGirl.create(:user,
-    name: user,
+    name: name,
     username: username,
     email: "#{username}@example.com",
     password: "password"
@@ -38,7 +38,7 @@ end
   name = Faker::Name.name
   username = user.downcase.delete(' ')
   user = FactoryGirl.create(:user,
-    name: user,
+    name: name,
     username: username,
     email: "#{username}@example.com",
     password: "password"
