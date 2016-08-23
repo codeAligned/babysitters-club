@@ -11,7 +11,6 @@ class Api::V1::ReviewsController < ApplicationController
   end
 
   def create
-    byebug
     review = Review.create(review_params)
     render json: review
   end

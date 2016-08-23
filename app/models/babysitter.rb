@@ -7,8 +7,6 @@ class Babysitter < ApplicationRecord
   has_many :requests
   has_many :reviews
 
-
-
   def network
     self.parents.map do |parent|
       {
