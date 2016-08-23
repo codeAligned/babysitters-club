@@ -79,8 +79,6 @@ class Parent < ApplicationRecord
     self.user.email
   end
 
-  def reviews
-    Review.joins_table.where('parent_id=?', self.id)
-  end
+
 
 end

@@ -12,8 +12,6 @@ class Api::V1::ReviewsController < ApplicationController
 
   def create
     review = Review.create(review_params)
-    review.parent_babysitter_id = 7
-    review.save
     render json: review
   end
 
@@ -32,7 +30,7 @@ class Api::V1::ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:title, :description, :rating)
+    params.require(:review).permit(:babysitter_id, :parent_id, :title, :description, :rating)
   end
 
 end
