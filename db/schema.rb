@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160820215336) do
+ActiveRecord::Schema.define(version: 20160822231223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,7 +44,6 @@ ActiveRecord::Schema.define(version: 20160820215336) do
     t.integer  "duration"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.string   "desired_date"
     t.string   "desired_time"
     t.index ["babysitter_id"], name: "index_bookings_on_babysitter_id", using: :btree
     t.index ["parent_id"], name: "index_bookings_on_parent_id", using: :btree
@@ -76,10 +75,14 @@ ActiveRecord::Schema.define(version: 20160820215336) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.integer "parent_babysitter_id"
     t.string  "title"
     t.string  "description"
     t.integer "rating"
+    t.string  "review"
+    t.integer "babysitter_id"
+    t.integer "parent_id"
+    t.index ["babysitter_id"], name: "index_reviews_on_babysitter_id", using: :btree
+    t.index ["parent_id"], name: "index_reviews_on_parent_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -99,4 +102,6 @@ ActiveRecord::Schema.define(version: 20160820215336) do
   add_foreign_key "bookings", "babysitters"
   add_foreign_key "bookings", "parents"
   add_foreign_key "parents", "users"
+  add_foreign_key "reviews", "babysitters"
+  add_foreign_key "reviews", "parents"
 end

@@ -5,6 +5,7 @@ class Parent < ApplicationRecord
   has_many :bookings
   has_many :booking_requests
   has_many :requests
+  has_many :reviews
 
   def self.search(search)
     Parent.all.select do |parent|
