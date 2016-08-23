@@ -13,10 +13,6 @@ class Api::V1::ReviewsController < ApplicationController
   def create
     byebug
     review = Review.create(review_params)
-    review.parent_babysitter_id = 7
-    review.save
-
-    byebug
     render json: review
   end
 
