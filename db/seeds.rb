@@ -17,7 +17,7 @@ User.destroy_all
 # Create users who are parents
 150.times do
   name = Faker::Name.name
-  username = user.downcase.delete(' ')
+  username = name.downcase.delete(' ')
   user = FactoryGirl.create(:user,
     name: name,
     username: username,
@@ -27,7 +27,7 @@ User.destroy_all
   FactoryGirl.create(:parent,
     user_id: user.id,
     address: Faker::Address.street_address,
-    kid_count: Random.rand(1..6)
+    kid_count: Random.rand(1..6),
     specific_needs: Faker::Lorem.sentence(3),
     extra_requests: Faker::Lorem.sentence(3)
   )
@@ -36,7 +36,7 @@ end
 # Create users who are babysitters
 50.times do
   name = Faker::Name.name
-  username = user.downcase.delete(' ')
+  username = name.downcase.delete(' ')
   user = FactoryGirl.create(:user,
     name: name,
     username: username,
@@ -54,7 +54,7 @@ end
 
 # Randomly create requests between babysitters and parents
 Parent.all.each do |parent|
-  Babysitter.all.each do |parent|
+  Babysitter.all.each do |babysitter|
     if Random.rand(0..10) > 6
       FactoryGirl.create(:request,
         parent_id: parent.id,
