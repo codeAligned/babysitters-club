@@ -11,6 +11,7 @@ class Api::V1::ReviewsController < ApplicationController
   end
 
   def create
+    byebug
     review = Review.create(review_params)
     review.parent_babysitter_id = 7
     review.save
@@ -34,7 +35,7 @@ class Api::V1::ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:title, :description, :rating)
+    params.require(:review).permit(:babysitter_id, :parent_id, :title, :description, :rating)
   end
 
 end

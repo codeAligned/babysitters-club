@@ -5,10 +5,9 @@ class Babysitter < ApplicationRecord
   has_many :bookings
   has_many :booking_requests
   has_many :requests
+  has_many :reviews
 
-  def reviews
-    Review.joins_table.where('babysitter_id=?', self.id)
-  end
+
 
   def network
     self.parents.map do |parent|

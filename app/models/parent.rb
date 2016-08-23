@@ -5,6 +5,7 @@ class Parent < ApplicationRecord
   has_many :bookings
   has_many :booking_requests
   has_many :requests
+  has_many :reviews
 
   def self.search(search)
     Parent.all.select do |parent|
@@ -78,8 +79,6 @@ class Parent < ApplicationRecord
     self.user.email
   end
 
-  def reviews
-    Review.joins_table.where('parent_id=?', self.id)
-  end
+
 
 end
