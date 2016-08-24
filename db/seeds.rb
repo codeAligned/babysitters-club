@@ -73,8 +73,9 @@ Parent.all.each do |parent|
       FactoryGirl.create(:booking_request,
         parent_id: parent.id,
         babysitter_id: babysitter.id,
-        duration: 60
-        
+        duration: "#{Random.rand(1..4)}" + "hours",
+        desired_time: "#{Random.rand(7..20)}" + ":00",
+        desired_date: "The" + " " + "#{Random.rand(4..20)}" + "th"
       )
     end
   end
