@@ -74,6 +74,7 @@ Parent.all.each do |parent|
         parent_id: parent.id,
         babysitter_id: babysitter.id,
         duration: 60
+        
       )
     end
   end
