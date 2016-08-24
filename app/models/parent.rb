@@ -8,9 +8,7 @@ class Parent < ApplicationRecord
   has_many :reviews
 
   def self.search(search)
-    Parent.all.select do |parent|
-      parent.name.downcase==search.downcase
-    end
+    Parent.joins(:user).where('name LIKE ?', search)
   end
 
   def user_id
