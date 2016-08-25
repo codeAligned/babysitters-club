@@ -11,10 +11,10 @@ class Api::V1::BabysittersController < ApplicationController
 	end
 
 	def update
-		babysitter = Babysitter.find(params[:id])
-		babysitter.update(babysitter_params)
-		# (babysitter_params) don't forget patch!
-		render json: babysitter
+		babysitter = User.find(params[:id])
+		updated_babysitter = Babysitter.find_by(user_id: babysitter.id)
+		updated_babysitter.update(babysitter_params)
+		render json: updated_babysitter
 	end
 
   def destroy
