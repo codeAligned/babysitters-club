@@ -11,7 +11,6 @@ class Api::V1::BabysittersController < ApplicationController
 	end
 
 	def update
-		byebug
 		babysitter = User.find(params[:id])
 		updated_babysitter = Babysitter.find_by(user_id: babysitter.id)
 		updated_babysitter.update(babysitter_params)
