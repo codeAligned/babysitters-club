@@ -23,7 +23,21 @@ class Parent < ApplicationRecord
     self.user.name
   end
 
-  def network
+
+  def network_with_current_user_info(id)
+    current_parent_user = User.find(id).parent
+    self.network_hash.each do |babysitter|
+      if current_parent_user.babysitters.include?(babysitter)
+        babysitter[:button_value] = "IN CURRENT USER NETWORK"
+      elsif !!current_parent_user.requests.find_by(babysitter_id: babysitter[:id])
+        babysitter[:button_value] = "PENDING NETWORK REQUEST"
+      else
+        babysitter[:button_value] = "SHOW BUTTON"
+      end
+    end
+  end
+
+  def network_hash
     self.babysitters.map do |babysitter|
       {
         id: babysitter.id,
@@ -33,6 +47,21 @@ class Parent < ApplicationRecord
         location: babysitter.location,
         bio: babysitter.bio,
         skills: babysitter.skills
+      }
+    end
+  end
+
+  def network(id)
+    self.network_with_current_user_info(id).map do |babysitter|
+      {
+        id: babysitter[:id],
+        user_id: babysitter[:user_id],
+        name: babysitter[:name],
+        email: babysitter[:email],
+        location: babysitter[:location],
+        bio: babysitter[:bio],
+        skills: babysitter[:skills],
+        button_value: babysitter[:button_value]
       }
     end
   end
