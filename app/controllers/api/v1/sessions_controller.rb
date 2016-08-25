@@ -11,7 +11,7 @@ class Api::V1::SessionsController < ApplicationController
         if user.type=='Parent'
           render json: {jwt: jwt, current_user: user, type: user.type, account: {
             parent: user.associated_user,
-            network: user.associated_user.network,
+            network: user.associated_user.network_hash,
             network_requests: user.associated_user.network_requests,
             confirmed_bookings: user.associated_user.confirmed_bookings,
             requested_bookings: user.associated_user.requested_bookings
@@ -36,12 +36,11 @@ class Api::V1::SessionsController < ApplicationController
 
   def show
     user = User.find(retrieve_params[:id])
-
     if user != nil
       if user.type=='Parent'
         render json: {current_user: user, account: {
           parent: user.associated_user,
-          network: user.associated_user.network,
+          network: user.associated_user.network_hash,
           network_requests: user.associated_user.network_requests,
           confirmed_bookings: user.associated_user.confirmed_bookings,
           requested_bookings: user.associated_user.requested_bookings

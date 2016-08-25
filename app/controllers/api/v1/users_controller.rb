@@ -32,11 +32,13 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
+
     user = User.find(viewable_user_id_params[:id])
+
     if user.type=='Parent'
       render json: {viewable_user: user, type: user.type, account: {
         parent: user.associated_user,
-        network: user.associated_user.network
+        network: user.associated_user.network(viewable_user_id_params[:current_user_id])
       }}
     else
       render json: {viewable_user: user, type: user.type, account: {
@@ -59,7 +61,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def viewable_user_id_params
-    params.require(:user).permit(:id)
+    params.require(:user).permit(:id, :current_user_id)
   end
 
   def edit_parent_params
