@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 20160822231223) do
     t.string  "title"
     t.string  "description"
     t.integer "rating"
+    t.string  "review"
     t.integer "babysitter_id"
     t.integer "parent_id"
     t.index ["babysitter_id"], name: "index_reviews_on_babysitter_id", using: :btree
