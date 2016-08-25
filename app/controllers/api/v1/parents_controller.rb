@@ -9,7 +9,7 @@ class Api::V1::ParentsController < ApplicationController
 	end
 
 	def index
-	
+
 		parents = Parent.search(search_params[:searchValue])
 		render json: parents
 	end
@@ -20,9 +20,11 @@ class Api::V1::ParentsController < ApplicationController
 	end
 
 	def update
-		parent = Parent.find(params[:id])
-		parent.update(parents_params)
-		render json: parent
+		byebug
+		parent = User.find(params[:id])
+		updated_parent = Parent.find_by(user_id: parent.id)
+		updated_parent.update(parents_params)
+		render json: updated_parent
 	end
 
   def destroy
