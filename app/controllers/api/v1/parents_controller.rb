@@ -20,7 +20,6 @@ class Api::V1::ParentsController < ApplicationController
 	end
 
 	def update
-		byebug
 		parent = User.find(params[:id])
 		updated_parent = Parent.find_by(user_id: parent.id)
 		updated_parent.update(parents_params)
