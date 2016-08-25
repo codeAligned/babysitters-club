@@ -17,6 +17,17 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def update
+    
+    user = User.find(params[:id])
+    if user.type=='Parent'
+      parent = Parent.find_by(user_id: params[:id])
+      parent.update(edit_parent_params)
+      render json: parent
+    else
+      babysitter = Babysitter.find_by(user_id: params[:id])
+      babysitter.update(edit_babysitter_params)
+      render json: babysitter
+    end
 
   end
 
@@ -51,7 +62,12 @@ class Api::V1::UsersController < ApplicationController
     params.require(:user).permit(:id)
   end
 
+  def edit_parent_params
+    params.require(:user).permit(:address, :kid_count, :specific_needs, :extra_requests)
+  end
 
-
+  def edit_babysitter_params
+	 	params.require(:user).permit(:age, :location, :bio, :skills)
+ 	end
 
 end
