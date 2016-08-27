@@ -9,7 +9,6 @@ class Api::V1::ParentsController < ApplicationController
 	end
 
 	def index
-
 		parents = Parent.search(search_params[:searchValue])
 		render json: parents
 	end
