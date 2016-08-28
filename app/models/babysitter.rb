@@ -80,4 +80,8 @@ class Babysitter < ApplicationRecord
     self.user.email
   end
 
+  def username
+    self.user.username
+  end 
+
 end

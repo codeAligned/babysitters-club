@@ -17,7 +17,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def update
-    
+
     user = User.find(params[:id])
     if user.type=='Parent'
       parent = Parent.find_by(user_id: params[:id])
