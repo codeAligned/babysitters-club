@@ -23,9 +23,8 @@ class Parent < ApplicationRecord
     self.user.name
   end
 
-
   def network_with_current_user_info(id)
-    current_parent_user = User.find(id).parent
+    current_parent_user = User.find(id).associated_user
     self.network_hash.each do |babysitter|
       if current_parent_user.babysitters.include?(babysitter)
         babysitter[:button_value] = "IN CURRENT USER NETWORK"

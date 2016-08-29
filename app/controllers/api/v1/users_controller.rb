@@ -17,7 +17,6 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def update
-    
     user = User.find(params[:id])
     if user.type=='Parent'
       parent = Parent.find_by(user_id: params[:id])
@@ -32,13 +31,17 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def show
-
     user = User.find(viewable_user_id_params[:id])
-
-    if user.type=='Parent'
+    current_user = User.find(viewable_user_id_params[:current_user_id])
+    if user.type=='Parent' && current_user.type=='Parent'
       render json: {viewable_user: user, type: user.type, account: {
         parent: user.associated_user,
         network: user.associated_user.network(viewable_user_id_params[:current_user_id])
+      }}
+    elsif user.type=='Parent'
+      render json: {viewable_user: user, type: user.type, account: {
+        parent: user.associated_user,
+        network: user.associated_user.network_hash
       }}
     else
       render json: {viewable_user: user, type: user.type, account: {
