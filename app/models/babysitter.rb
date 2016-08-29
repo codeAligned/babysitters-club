@@ -17,7 +17,8 @@ class Babysitter < ApplicationRecord
         address: parent.address,
         kid_count: parent.kid_count,
         specific_needs: parent.specific_needs,
-        extra_requests: parent.extra_requests
+        extra_requests: parent.extra_requests,
+        profile_pic: parent.user.profile_pic
       }
     end
   end

@@ -15,7 +15,8 @@ User.destroy_all
     name: name,
     username: username,
     email: "#{username}@example.com",
-    password: "password"
+    password: "password",
+    profile_pic: '/src/images/png/#{(Random.new.rand(10) + 1)}.png'
   )
   FactoryGirl.create(:parent,
     user_id: user.id,
@@ -34,7 +35,8 @@ end
     name: name,
     username: username,
     email: "#{username}@example.com",
-    password: "password"
+    password: "password",
+    profile_pic: '/src/images/png/#{(Random.new.rand(10) + 1)}.png'
   )
   FactoryGirl.create(:babysitter,
     user_id: user.id,

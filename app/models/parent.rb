@@ -45,7 +45,8 @@ class Parent < ApplicationRecord
         email: babysitter.email,
         location: babysitter.location,
         bio: babysitter.bio,
-        skills: babysitter.skills
+        skills: babysitter.skills,
+        profile_pic: babysitter.user.profile_pic
       }
     end
   end
@@ -60,7 +61,8 @@ class Parent < ApplicationRecord
         location: babysitter[:location],
         bio: babysitter[:bio],
         skills: babysitter[:skills],
-        button_value: babysitter[:button_value]
+        button_value: babysitter[:button_value],
+        profile_pic: babysitter.user.profile_pic
       }
     end
   end

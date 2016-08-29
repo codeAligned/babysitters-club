@@ -8,6 +8,7 @@ class Api::V1::UsersController < ApplicationController
 
   def create
     user = User.create(user_params)
+    user.profile_pic = '/src/images/png/#{(Random.new.rand(10) + 1)}.png'
     if user_type_params[:user_type]=='PARENT'
       account = Parent.create({user_id: user.id})
     else
