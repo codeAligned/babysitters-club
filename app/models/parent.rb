@@ -23,6 +23,10 @@ class Parent < ApplicationRecord
     self.user.name
   end
 
+  def profile_pic
+    self.user.profile_pic
+  end
+
   def network_with_current_user_info(id)
     current_parent_user = User.find(id).associated_user
     self.network_hash.each do |babysitter|
@@ -62,7 +66,7 @@ class Parent < ApplicationRecord
         bio: babysitter[:bio],
         skills: babysitter[:skills],
         button_value: babysitter[:button_value],
-        profile_pic: babysitter.user.profile_pic
+        profile_pic: babysitter[:profile_pic]
       }
     end
   end
