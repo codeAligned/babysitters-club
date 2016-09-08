@@ -79,11 +79,20 @@ ActiveRecord::Schema.define(version: 20160829145858) do
     t.string  "title"
     t.string  "description"
     t.integer "rating"
-    t.string  "review"
     t.integer "babysitter_id"
     t.integer "parent_id"
     t.index ["babysitter_id"], name: "index_reviews_on_babysitter_id", using: :btree
     t.index ["parent_id"], name: "index_reviews_on_parent_id", using: :btree
+  end
+
+  create_table "trigrams", force: :cascade do |t|
+    t.string  "trigram",     limit: 3
+    t.integer "score",       limit: 2
+    t.integer "owner_id"
+    t.string  "owner_type"
+    t.string  "fuzzy_field"
+    t.index ["owner_id", "owner_type", "fuzzy_field", "trigram", "score"], name: "index_for_match", using: :btree
+    t.index ["owner_id", "owner_type"], name: "index_by_owner", using: :btree
   end
 
   create_table "users", force: :cascade do |t|

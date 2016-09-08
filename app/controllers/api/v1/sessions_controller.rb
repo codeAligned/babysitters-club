@@ -3,29 +3,14 @@ class Api::V1::SessionsController < ApplicationController
 
   def create
     user = User.find_by(email: auth_params[:email])
-
     if user != nil
       if user.authenticate(auth_params[:password])
         jwt = Auth.issue({user: user.id})
-
         if user.type=='Parent'
-          render json: {jwt: jwt, current_user: user, type: user.type, account: {
-            parent: user.associated_user,
-            network: user.associated_user.network_hash,
-            network_requests: user.associated_user.network_requests,
-            confirmed_bookings: user.associated_user.confirmed_bookings,
-            requested_bookings: user.associated_user.requested_bookings
-          }}
+          render json: RenderParentUser.login(jwt, user)
         else
-          render json: {jwt: jwt, current_user: user, type: user.type, account: {
-            babysitter: user.associated_user,
-            network: user.associated_user.network,
-            network_requests: user.associated_user.network_requests,
-            confirmed_bookings: user.associated_user.confirmed_bookings,
-            requested_bookings: user.associated_user.requested_bookings
-          }}
+          render json: RenderBabysitterUser.login(jwt, user)
         end
-
       else
         render json: {error: "unauthorized"}, status: 404
       end
@@ -38,21 +23,23 @@ class Api::V1::SessionsController < ApplicationController
     user = User.find(retrieve_params[:id])
     if user != nil
       if user.type=='Parent'
-        render json: {current_user: user, account: {
-          parent: user.associated_user,
-          network: user.associated_user.network_hash,
-          network_requests: user.associated_user.network_requests,
-          confirmed_bookings: user.associated_user.confirmed_bookings,
-          requested_bookings: user.associated_user.requested_bookings
-        }}
+        render json: RenderParentUser.viewable_user(user)
+        # {current_user: user, account: {
+        #   parent: user.associated_user,
+        #   network: user.associated_user.network_hash,
+        #   network_requests: user.associated_user.network_requests,
+        #   confirmed_bookings: user.associated_user.confirmed_bookings,
+        #   requested_bookings: user.associated_user.requested_bookings
+        # }}
       else
-        render json: {current_user: user, account: {
-          babysitter: user.associated_user,
-          network: user.associated_user.network,
-          network_requests: user.associated_user.network_requests,
-          confirmed_bookings: user.associated_user.confirmed_bookings,
-          requested_bookings: user.associated_user.requested_bookings
-        }}
+        render json: RenderBabysitterUser.viewable_user(user)
+        # {current_user: user, account: {
+        #   babysitter: user.associated_user,
+        #   network: user.associated_user.network,
+        #   network_requests: user.associated_user.network_requests,
+        #   confirmed_bookings: user.associated_user.confirmed_bookings,
+        #   requested_bookings: user.associated_user.requested_bookings
+        # }}
       end
     else
       render json: {error: "user does not exist"}, status: 404
