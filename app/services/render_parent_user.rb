@@ -10,7 +10,7 @@ class RenderParentUser
     }}
   end
 
-  def self.viewable_user(user)
+  def self.retreive_current_user(user)
     {current_user: user, account: {
       parent: user.associated_user,
       network: user.associated_user.network_hash,
@@ -19,5 +19,13 @@ class RenderParentUser
       requested_bookings: user.associated_user.requested_bookings
     }}
   end
+
+  def self.current_viewable_user(user, current_user_id)
+    {viewable_user: user, type: user.type, account: {
+      parent: user.associated_user,
+      network: user.associated_user.network(current_user_id)
+    }}
+  end
+
 
 end
