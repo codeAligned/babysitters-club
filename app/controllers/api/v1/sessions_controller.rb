@@ -24,22 +24,9 @@ class Api::V1::SessionsController < ApplicationController
     if user != nil
       if user.type=='Parent'
         render json: RenderParentUser.viewable_user(user)
-        # {current_user: user, account: {
-        #   parent: user.associated_user,
-        #   network: user.associated_user.network_hash,
-        #   network_requests: user.associated_user.network_requests,
-        #   confirmed_bookings: user.associated_user.confirmed_bookings,
-        #   requested_bookings: user.associated_user.requested_bookings
-        # }}
       else
         render json: RenderBabysitterUser.viewable_user(user)
-        # {current_user: user, account: {
-        #   babysitter: user.associated_user,
-        #   network: user.associated_user.network,
-        #   network_requests: user.associated_user.network_requests,
-        #   confirmed_bookings: user.associated_user.confirmed_bookings,
-        #   requested_bookings: user.associated_user.requested_bookings
-        # }}
+        
       end
     else
       render json: {error: "user does not exist"}, status: 404
